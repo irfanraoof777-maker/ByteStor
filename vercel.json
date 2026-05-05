@@ -1,5 +1,22 @@
 {
-  "framework": null,
-  "buildCommand": "pnpm --filter @workspace/api-server run build",
-  "installCommand": "pnpm install"
+  "version": 2,
+  "builds": [
+    {
+      "src": "artifacts/api-server/src/index.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "artifacts/api-server/src/**",
+          "lib/api-zod/src/**",
+          "lib/db/src/**"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/artifacts/api-server/src/index.ts"
+    }
+  ]
 }
