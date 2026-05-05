@@ -3,6 +3,143 @@ import { Link } from "wouter";
 import { Globe, Building2, Handshake, ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 
+const techPartners = [
+  {
+    name: "Dell EMC",
+    category: "Storage Hardware",
+    color: "#007DB8",
+    abbr: "Dell\nEMC",
+    svg: (
+      <svg viewBox="0 0 120 40" className="w-24 h-10">
+        <text x="0" y="30" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="28" fill="#007DB8">Dell</text>
+        <text x="62" y="30" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="22" fill="#007DB8">EMC</text>
+      </svg>
+    ),
+  },
+  {
+    name: "NetApp",
+    category: "Storage Hardware",
+    color: "#0067C5",
+    svg: (
+      <svg viewBox="0 0 120 40" className="w-28 h-10">
+        <text x="0" y="30" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="28" fill="#0067C5">Net</text>
+        <text x="54" y="30" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="28" fill="#00B0E0">App</text>
+      </svg>
+    ),
+  },
+  {
+    name: "CommVault",
+    category: "Data Management",
+    color: "#C8102E",
+    svg: (
+      <svg viewBox="0 0 140 40" className="w-32 h-10">
+        <rect x="0" y="8" width="10" height="24" rx="5" fill="#C8102E"/>
+        <text x="18" y="30" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="22" fill="currentColor" className="fill-foreground">CommVault</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Veritas",
+    category: "Data Protection",
+    color: "#E31837",
+    svg: (
+      <svg viewBox="0 0 120 40" className="w-28 h-10">
+        <circle cx="12" cy="20" r="10" fill="#E31837"/>
+        <text x="28" y="28" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="22" fill="currentColor" className="fill-foreground">Veritas</text>
+      </svg>
+    ),
+  },
+  {
+    name: "VMware",
+    category: "Virtualization",
+    color: "#1D428A",
+    svg: (
+      <svg viewBox="0 0 120 40" className="w-28 h-10">
+        <text x="0" y="28" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="24" fill="#1D428A">VM</text>
+        <text x="38" y="28" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="24" fill="currentColor" className="fill-foreground">ware</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Veeam",
+    category: "Backup & Replication",
+    color: "#00B336",
+    svg: (
+      <svg viewBox="0 0 110 40" className="w-24 h-10">
+        <polygon points="0,10 16,20 0,30" fill="#00B336"/>
+        <text x="22" y="28" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="24" fill="currentColor" className="fill-foreground">Veeam</text>
+      </svg>
+    ),
+  },
+  {
+    name: "HPE",
+    category: "Infrastructure",
+    color: "#01A982",
+    svg: (
+      <svg viewBox="0 0 80 40" className="w-20 h-10">
+        <text x="0" y="30" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="32" fill="#01A982">HPE</text>
+      </svg>
+    ),
+  },
+  {
+    name: "IBM",
+    category: "Enterprise IT",
+    color: "#054ADA",
+    svg: (
+      <svg viewBox="0 0 80 40" className="w-20 h-10">
+        <text x="0" y="32" fontFamily="Arial, sans-serif" fontWeight="900" fontSize="36" fill="#054ADA">IBM</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Microsoft",
+    category: "Cloud & OS",
+    color: "#0078D4",
+    svg: (
+      <svg viewBox="0 0 160 40" className="w-36 h-10">
+        <rect x="0" y="2" width="17" height="17" fill="#F25022"/>
+        <rect x="19" y="2" width="17" height="17" fill="#7FBA00"/>
+        <rect x="0" y="21" width="17" height="17" fill="#00A4EF"/>
+        <rect x="19" y="21" width="17" height="17" fill="#FFB900"/>
+        <text x="44" y="28" fontFamily="Arial, sans-serif" fontWeight="600" fontSize="18" fill="currentColor" className="fill-foreground">Microsoft</text>
+      </svg>
+    ),
+  },
+  {
+    name: "OSNEXUS",
+    category: "Software-Defined Storage",
+    color: "#2E86C1",
+    svg: (
+      <svg viewBox="0 0 140 40" className="w-32 h-10">
+        <text x="0" y="28" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="22" fill="#2E86C1">OS</text>
+        <text x="34" y="28" fontFamily="Arial, sans-serif" fontWeight="400" fontSize="22" fill="currentColor" className="fill-foreground">NEXUS</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Nimble Storage",
+    category: "Flash Storage",
+    color: "#00A1DE",
+    svg: (
+      <svg viewBox="0 0 150 40" className="w-36 h-10">
+        <path d="M0,30 L12,5 L24,30 Z" fill="#00A1DE"/>
+        <text x="30" y="28" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="20" fill="currentColor" className="fill-foreground">Nimble</text>
+      </svg>
+    ),
+  },
+  {
+    name: "Broadcom",
+    category: "Software & Infrastructure",
+    color: "#CC0000",
+    svg: (
+      <svg viewBox="0 0 140 40" className="w-32 h-10">
+        <circle cx="14" cy="20" r="12" fill="none" stroke="#CC0000" strokeWidth="4"/>
+        <text x="32" y="28" fontFamily="Arial, sans-serif" fontWeight="700" fontSize="20" fill="currentColor" className="fill-foreground">Broadcom</text>
+      </svg>
+    ),
+  },
+];
+
 const regions = [
   {
     icon: <Globe className="w-8 h-8 text-primary" />,
@@ -64,6 +201,66 @@ export default function Clients() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Technology Partners Logo Grid */}
+      <section className="py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-14"
+          >
+            <p className="text-primary font-semibold uppercase tracking-widest text-sm mb-3">Ecosystem</p>
+            <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-4">
+              Technology Partners & Vendors
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              We work with and deliver expert training and consultancy services on the world's leading enterprise
+              storage, backup, virtualization, and infrastructure platforms.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {techPartners.map((partner, i) => (
+              <motion.div
+                key={partner.name}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05, duration: 0.4 }}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="bg-card border border-border rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 transition-all group"
+                data-testid={`partner-logo-${i}`}
+              >
+                <div className="h-12 flex items-center justify-center w-full overflow-hidden">
+                  {partner.svg}
+                </div>
+                <p className="text-xs text-muted-foreground text-center leading-tight">{partner.category}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Scrolling marquee strip */}
+      <section className="py-8 border-y border-border bg-secondary/30 overflow-hidden">
+        <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-5">
+          Certified & Vendor-Neutral Expertise Across Leading Platforms
+        </p>
+        <div className="flex gap-14 animate-marquee whitespace-nowrap px-4">
+          {[...techPartners, ...techPartners].map((p, i) => (
+            <div key={i} className="flex items-center gap-2 shrink-0">
+              <div
+                className="w-3 h-3 rounded-full shrink-0"
+                style={{ backgroundColor: p.color }}
+              />
+              <span className="text-muted-foreground font-semibold text-sm">{p.name}</span>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -135,7 +332,10 @@ export default function Clients() {
             Join the growing list of enterprises that trust ByteStor IT Services for their critical infrastructure and workforce development needs.
           </p>
           <Link href="/contact">
-            <button className="px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all flex items-center gap-2 mx-auto" data-testid="btn-partner">
+            <button
+              className="px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all flex items-center gap-2 mx-auto"
+              data-testid="btn-partner"
+            >
               Work With Us <ArrowRight className="w-4 h-4" />
             </button>
           </Link>
